@@ -21,7 +21,7 @@ set :repo_url, "git@github.com:cgratigny/battle-planner-ic-connector.git"
 set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
+set :linked_files, %w{config/master.key}
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -42,3 +42,25 @@ set :pty, true
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 set :whenever_roles, "whenever"
+
+
+namespace :deploy do
+
+  desc 'Restart Passenger'
+  task :restart_passenger do
+    on roles(:web), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  task :ping do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "curl -k #{fetch(:ping_url)}"
+    end
+  end
+
+  after :publishing, :restart_passenger
+  after :publishing, :ping
+
+end
