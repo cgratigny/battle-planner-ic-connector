@@ -20,12 +20,21 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'mongoid', '7.1.0', git: 'https://github.com/mongodb/mongoid.git', ref: "c333f9bb379017c8c6e814a20c58462b35210b3a"
+
+
 # for authorizing users
 gem 'pundit'
 
+gem "podio"
+
+gem "amazing_print"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+
+# cron gem
+gem "whenever"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -39,6 +48,13 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem "capistrano-rails"
+  gem 'capistrano-bundler', '~> 1.6'
+  gem "capistrano-rvm"
+  gem "capistrano-ssh-doctor", "~> 1.0"
+  gem 'capistrano-rake', require: false
+
 end
 
 group :test do

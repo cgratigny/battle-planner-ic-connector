@@ -14,13 +14,15 @@ class MembersController < ApplicationController
 
   private
 
-    def build_collection
-      xml = Net::HTTP.get_response(URI.parse(podio_url)).body
-      @members = Hash.from_xml(xml).to_json
-    end
 
-    def podio_url
-      Rails.application.credentials.dig(:podio_members_url)
+  def build_collection
+    if params[:status] == :active.to_s
+      @members = Member.active
+    elsif params[:status] == :deactivated.to_s
+      @members = Member.deactivated
+    else
+      @members = Member.all
     end
+  end
 
 end
