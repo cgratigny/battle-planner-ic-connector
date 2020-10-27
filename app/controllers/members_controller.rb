@@ -9,11 +9,10 @@ class MembersController < ApplicationController
 
   # GET /members
   def index
-    render json: @members
+    render json: @members.map{ |member| member.to_h }
   end
 
   private
-
 
   def build_collection
     if params[:status] == :active.to_s
