@@ -9,7 +9,7 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    render json: @teams
+    render json: @teams.map{ |team| team.to_h }
   end
 
   private
