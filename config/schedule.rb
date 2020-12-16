@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.hour, :roles => [:whenever] do
-  rake "podio:sync"
+  rake "podio_task:sync"
 end
