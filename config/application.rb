@@ -24,7 +24,9 @@ module Bp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.autoload_paths += Dir[Rails.root.join('app', 'modules', '**/')]
+    config.beginning_of_week = :sunday
+
+    config.autoload_paths += Dir[Rails.root.join('app', 'decorators', 'modules', '**/')]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
