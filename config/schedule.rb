@@ -24,17 +24,17 @@ every 1.day, at: ["0:00"], :roles => [:whenever] do
 end
 
 every 1.day, at: ["1:00"], :roles => [:whenever] do
-  rake "sync_users:sync_users"
+  rake "firestore_task:sync_users"
 end
 
 every 1.day, at: ["1:15"], :roles => [:whenever] do
-  rake "sync_users:sync_plans"
+  rake "firestore_task:sync_plans"
 end
 
 every 1.day, at: ["1:30"], :roles => [:whenever] do
-  rake "sync_users:sync_all_progress"
+  rake "firestore_task:sync_all_progress"
 end
 
 every 1.hour, :roles => [:whenever] do
-  rake "sync_users:sync_recent_progress"
+  rake "firestore_task:sync_recent_progress"
 end

@@ -26,7 +26,7 @@ class FirestoreService < ApplicationService
   end
 
   def users_collection
-    firestore.col("users").where(:status, :"=", :active).limit(10)
+    firestore.col("users").where(:status, :"=", :active)
   end
 
 end
