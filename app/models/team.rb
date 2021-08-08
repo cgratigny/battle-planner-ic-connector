@@ -1,4 +1,4 @@
-class Team
+class Team < MongoidRecord
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic
 

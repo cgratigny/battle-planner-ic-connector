@@ -1,6 +1,6 @@
 namespace :podio_task do
-  desc "Create absences for students"
+  desc "Update all users from podio"
   task :sync => :environment do
-    ApplicationService.cache_all
+    PodioSyncService.new.cache_all
   end
 end
