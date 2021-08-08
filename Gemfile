@@ -4,29 +4,34 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
+gem 'rails', '~> 6.1.4'
+
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
+
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'mongoid', '7.1.0', git: 'https://github.com/mongodb/mongoid.git', ref: "c333f9bb379017c8c6e814a20c58462b35210b3a"
+gem 'mongoid'
 
+# firebase connection
+gem "google-cloud-firestore"
 
 # for authorizing users
 gem 'pundit'
 
-gem "podio"
+gem "podio", git: 'https://github.com/cgratigny/podio-rb.git'
 
 gem "amazing_print"
 
