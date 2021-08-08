@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: ["0:00"] :roles => [:whenever] do
+every 1.day, at: ["0:00"], :roles => [:whenever] do
   rake "podio_task:sync"
 end
 
