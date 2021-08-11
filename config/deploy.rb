@@ -54,13 +54,41 @@ namespace :deploy do
     end
   end
 
+  task :yarn do
+  on roles(:web), in: :sequence, wait: 1 do
+    execute "yarn install"
+  end
+end
+
+desc 'Precompile assets locally and then rsync to web servers'
+task :precompile do
+  run_locally do
+    execute :rails, 'webpacker:clobber'
+    execute :rails, 'webpacker:compile'
+  end
+
+  on roles(:web), in: :parallel do |server|
+    run_locally do
+      execute :rsync,
+        "-a --delete ./public/assets/packs/ #{server.user}@#{server.hostname}:#{shared_path}/public/assets/packs/"
+    end
+  end
+
+  run_locally do
+    execute :rm, "-rf public/assets/packs"
+  end
+
+end
+
   task :ping do
     on roles(:app), in: :sequence, wait: 5 do
       execute "curl -k #{fetch(:ping_url)}"
     end
   end
 
+  after :publishing, :yarn
   after :publishing, :restart_passenger
   after :publishing, :ping
+  after 'deploy:updated', :precompile
 
 end
