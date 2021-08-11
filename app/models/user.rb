@@ -16,11 +16,11 @@ class User < MongoidRecord
   field :gender, type: String
   field :start_date, type: DateTime
   field :plan_url, type: String
-  field :calibration, type: String
 
   validates_uniqueness_of :firestore_id
 
   has_many :plans
+  belongs_to :team, primary_key: :team_id
 
   def self.sync_from_firestore_user(firestore_user)
     firestore_user_decorator = FirestoreUserDecorator.new(firestore_user)

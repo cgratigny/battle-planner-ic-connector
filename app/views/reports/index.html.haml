@@ -1,0 +1,23 @@
+%h1 Team Report for #{@team.name}
+%h2 #{@date.beginning_of_week} - #{@date.end_of_week}
+
+%table
+  %thead
+    %tr
+      %th
+      - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
+        %td{colspan: 2}= quadrant.downcase.titleize
+  - @team.users.each do |user|
+
+    %tr
+      %td= user.name
+      - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
+        %td
+          - (@date.beginning_of_week..@date.end_of_week).each do |date|
+            %span{style: "width: 1em; display: inline-block;"}
+              - if user.plans.current(@date).success?(date: date, quadrant: quadrant)
+                %span.fas.fa-circle.success
+              - else
+                %span.far.fa-circle.fail
+        %td{style: "width: 3em"}
+          = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)

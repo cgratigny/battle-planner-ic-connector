@@ -20,13 +20,16 @@ class FirestoreService < ApplicationService
 
   def sync_progress
     users_collection.get.each do |firestore_user|
-      plan = Plan.by_firestore_user(firestore_user).by_date(date).first
-      plan.sync_for_date(date) if plan.present?
+      begin
+        plan = Plan.by_firestore_user(firestore_user).by_date(date).first
+        plan.sync_for_date(date) if plan.present?
+      rescue
+      end
     end
   end
 
   def users_collection
-    firestore.col("users").where(:status, :"=", :active)
+    firestore.col("users").where(:status, :"=", :active).where(:email, :"=", "chris@progettaconsulting.com")
   end
 
 end

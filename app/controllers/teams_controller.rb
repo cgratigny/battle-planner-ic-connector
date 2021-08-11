@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_member, only: [:show, :update, :destroy]
+  before_action :find_team, only: [:show]
   before_action :build_collection, only: :index
   before_action :authenticate!
 
@@ -12,7 +12,15 @@ class TeamsController < ApplicationController
     render json: @teams.map{ |team| team.to_h }
   end
 
+  def show
+    render json: @team
+  end
+
   private
+
+  def find_team
+    @team = Team.find_by(team_hash: params[:id])
+  end
 
   def build_collection
     @teams = Team.member
