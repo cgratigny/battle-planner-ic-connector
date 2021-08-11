@@ -1,4 +1,4 @@
-class APIController < ActionController::API
+class ApiController < ActionController::API
 
   def authenticate!
     raise Pundit::NotAuthorizedError, "Not authenticated!" unless authenticated?
