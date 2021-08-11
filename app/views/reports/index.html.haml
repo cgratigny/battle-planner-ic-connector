@@ -7,7 +7,7 @@
       %th
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
         %td{colspan: 2}= quadrant.downcase.titleize
-  - @team.users.each do |user|
+  - @team.users.order(name: :asc).each do |user|
 
     %tr
       %td= user.name
