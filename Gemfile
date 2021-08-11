@@ -41,6 +41,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # cron gem
 gem "whenever"
 
+# error reporting
+gem "sentry-ruby"
+
 # views
 gem 'hamlit-rails'
 
