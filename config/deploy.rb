@@ -24,7 +24,7 @@ set :pty, true
 set :linked_files, %w{config/master.key}
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+set :linked_dirs, %w{log tmp/pids tmp/cache vendor/bundle public/assets/packs tmp/db}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -75,7 +75,7 @@ task :precompile do
   end
 
   run_locally do
-    execute :rm, "-rf public/assets/packs"
+    # execute :rm, "-rf public/assets/packs"
   end
 
 end
