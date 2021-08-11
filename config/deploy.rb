@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.14.0"
+lock "~> 3.16.0"
 
 set :application, "battle-planner-ic-connector"
 set :repo_url, "git@github.com:cgratigny/battle-planner-ic-connector.git"
