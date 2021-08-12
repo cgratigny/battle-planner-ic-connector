@@ -1,6 +1,35 @@
-%p#notice= notice
+%h1 Team Report for #{@team.name}
+%h2
+  = link_to [@team, :report, { date: (@date.beginning_of_week - 7.days), token: params[:token]}] do
+    .fas.fa-chevron-left
+  #{@date.beginning_of_week} - #{@date.end_of_week}
+  = link_to [@team, :report, { date: (@date.beginning_of_week + 7.days), token: params[:token]}] do
+    .fas.fa-chevron-right
+
+%table
+  %thead
+    %tr
+      %th
+      - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
+        %td{colspan: 2}= quadrant.downcase.titleize
+  - @team.users.order(name: :asc).each do |user|
+
+    %tr
+      %td{style: "width: 15em;"}
+        = user.name
+      - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
+        %td
+          - (@date.beginning_of_week..@date.end_of_week).each do |date|
+            %span{style: "width: 1em; display: inline-block;"}
+              - if user.plans.current(@date).success?(date: date, quadrant: quadrant)
+                %span.fas.fa-square.success.rectangle
+              - else
+                %span.far.fa-square.fail.rectangle
+        %td{style: "width: 3em;"}
+          = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
 
 
-= link_to 'Edit', edit_report_path(@report)
-\|
-= link_to 'Back', reports_path
+%hr
+= simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
+  = f.button :button do
+    %span.fas.fa-sync

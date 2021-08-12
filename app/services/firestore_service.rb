@@ -1,5 +1,5 @@
 class FirestoreService < ApplicationService
-  attr_accessor :date
+  attr_accessor :date, :team
 
   def initialize(args = {})
     super
@@ -28,8 +28,16 @@ class FirestoreService < ApplicationService
     end
   end
 
+  def sync_progress_for_week
+    (self.date.beginning_of_week..self.date.end_of_week).each do |date|
+      FirestoreService.new(date: date).sync_progress
+    end
+  end
+
   def users_collection
-    firestore.col("users").where(:status, :"=", :active).where(:email, :"=", "chris@progettaconsulting.com")
+    collection = firestore.col("users").where(:status, :"=", :active)
+    collection.where(:team_id, :"=", team.team_id) if team.present?
+    collection
   end
 
 end

@@ -1,18 +1,17 @@
 class ReportsController < ApplicationController
-  before_action :find_team, only: [:index, :show]
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :find_team, only: [:index, :show, :update]
   # layout :application
 
   # GET /reports
   # GET /reports.json
   def index
-    @date = params[:date].try(:to_date) || Date.today
-    @reports = Report.all
   end
 
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @date = params[:date].try(:to_date) || Date.today
+    @reports = Report.all
   end
 
   # GET /reports/new
@@ -28,10 +27,10 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
-
+    raise true.inspect
     respond_to do |format|
       if @report.save
-        format.html { redirect_to @report, notice: 'Report was successfully created.' }
+        format.html { redirect_to [@team, :report, { date: params[:date], token: params[:token]}], notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
         format.html { render :new }
@@ -44,8 +43,8 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     respond_to do |format|
-      if @report.update(report_params)
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
+      if FirestoreService.new(date: Date.today, team: @team).sync_progress_for_week
+        format.html { redirect_to [@team, :report, { date: params[:date], token: params[:token]}], notice: 'Report was updated.' }
         format.json { render :show, status: :ok, location: @report }
       else
         format.html { render :edit }
@@ -67,11 +66,6 @@ class ReportsController < ApplicationController
   private
     def find_team
       @team = Team.find_by(team_hash: params[:team_id])
-    end
-
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report
-      @report = Report.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

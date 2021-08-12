@@ -16,6 +16,10 @@ class Team < MongoidRecord
     where(team_type: :member)
   end
 
+  def to_param
+    team_hash
+  end
+
   def to_h
     {
       id: self.team_id,

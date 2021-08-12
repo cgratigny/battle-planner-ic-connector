@@ -1,5 +1,7 @@
 %h1 Team Report for #{@team.name}
 %h2 #{@date.beginning_of_week} - #{@date.end_of_week}
+= simple_form_for(@team, url: [@team, :report], method: :patch) do |f|
+  = f.submit
 
 %table
   %thead
