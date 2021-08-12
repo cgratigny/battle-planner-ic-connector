@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
   private
 
   def find_team
-    @team = Team.find_by(team_hash: params[:id])
+    @team = Team.find_by(team_id: params[:id])
   end
 
   def build_collection

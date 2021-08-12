@@ -73,10 +73,13 @@ class Plan < MongoidRecord
     start_date = args[:date].beginning_of_week.to_date
     end_date = args[:date].end_of_week.to_date
     successes = []
-    (start_date..end_date).each do |date|
-      successes << success?(quadrant: args[:quadrant], date: date)
+    quadrants = args[:quadrant].present? ? [args[:quadrant]] : ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"]
+    quadrants.each do |quadrant|
+      (start_date..end_date).each do |date|
+        successes << success?(quadrant: quadrant.downcase, date: date)
+      end
     end
-    ((successes.count(true).to_f / week_days(args).to_f) * 100).round
+    ((successes.count(true).to_f / (week_days(args) * quadrants.count).to_f) * 100).round
   end
 
   def week_days(args)

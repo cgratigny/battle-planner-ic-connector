@@ -95,15 +95,23 @@ form
 
 @media (max-width: 1185px)
   .rectangle
-    width: 6px
+    width: 4px
     height: 2px
     margin: 1px
+  .percentage
+    padding-left: .5em
+    padding-right: .5em
+    width: 2em
 
 @media (min-width: 1185px)
   .rectangle
     width: 15px
     height: 3px
     margin: 2px
+  .percentage
+    padding-left: 1em
+    padding-right: 1em
+    width: 3em
 
 .rectangle
   border: 1px solid #000
@@ -121,18 +129,15 @@ form
   border: 1px solid #EEE
 
 .percentage
-  display: block
-  padding-left: 1em
-  width: 3em
+
   font-size: .8em
   span
     border-radius: 3px
     padding: 0 2px 0 2px
     width: 25px
-    display: inline-block
     text-align: right
 
-.quandrant-title, .name
+.quadrant-title, .name
   letter-spacing: 1.2px
   font-family: "DIN Condensed"
   font-size: 15px

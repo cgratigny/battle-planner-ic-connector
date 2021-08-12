@@ -22,7 +22,8 @@
     %tr
       %th
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
-        %td.quandrant-title{colspan: 2, class: quadrant.downcase}= quadrant.downcase.titleize
+        %th.quadrant-title{colspan: 2, class: quadrant.downcase}= quadrant.downcase.titleize
+      %th.quadrant-title Total
   - @team.users.order(name: :asc).each do |user|
 
     %tr
@@ -48,3 +49,9 @@
               = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
           - else
             = "-"
+      %td.percentage
+        - if user.plans.current(@date).present?
+          %span{ class: user.plans.current(@date).percentage_for_week(date: @date) < 80 ? "needs-attention" : "safe"}
+            = user.plans.current(@date).percentage_for_week(date: @date)
+        - else
+          = "-"

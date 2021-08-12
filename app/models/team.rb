@@ -8,7 +8,7 @@ class Team < MongoidRecord
   field :members, type: Array
   field :updated_at, type: DateTime
 
-  before_save :set_session_code
+  before_save :set_team_hash
 
   has_many :users, foreign_key: :team_id, primary_key: :team_id
 
@@ -17,7 +17,7 @@ class Team < MongoidRecord
   end
 
   def to_param
-    team_hash
+    team_id
   end
 
   def to_h
@@ -30,7 +30,7 @@ class Team < MongoidRecord
     }
   end
 
-  def set_session_code
+  def set_team_hash
     self.team_hash = SecureRandom.uuid unless self.team_hash.present?
   end
 

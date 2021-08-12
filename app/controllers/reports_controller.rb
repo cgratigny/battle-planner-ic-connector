@@ -65,7 +65,7 @@ class ReportsController < ApplicationController
 
   private
     def find_team
-      @team = Team.find_by(team_hash: params[:team_id])
+      @team = Team.find_by(team_id: params[:team_id])
     end
 
     # Only allow a list of trusted parameters through.
