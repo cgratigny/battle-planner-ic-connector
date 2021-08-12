@@ -76,7 +76,15 @@ class Plan < MongoidRecord
     (start_date..end_date).each do |date|
       successes << success?(quadrant: args[:quadrant], date: date)
     end
-    ((successes.count(true).to_f / 7.to_f) * 100).round
+    ((successes.count(true).to_f / week_days(args).to_f) * 100).round
+  end
+
+  def week_days(args)
+    if args[:date].end_of_week.to_date.future?
+      (Date.today - args[:date].beginning_of_week.to_date) + 1
+    else
+      7
+    end
   end
 
   def to_h(args = { date: Date.today })
@@ -98,6 +106,10 @@ class Plan < MongoidRecord
       condition_week_percentage: self.percentage_for_week(quadrant: :condition, date: args[:date]),
       contribution_week_percentage: self.percentage_for_week(quadrant: :contribution, date: args[:date])
     }
+  end
+
+  def plan_url
+    "https://app.12weekbattleplanner.com/plan/#{self.user.firestore_id}/#{self.quarter}"
   end
 
 end

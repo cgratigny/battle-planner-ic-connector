@@ -4,28 +4,42 @@ body
   -moz-background-size: cover
   -o-background-size: cover
   background-size: cover
-  // box-shadow: inset 0 0 0 50vw rgba(1, 1, 1, .3)
-  background: #000
-  color: #F7F7F7
+  box-shadow: inset 0 0 0 50vw rgba(255, 255, 255, .7)
+  // background: #FFF
+  color: #111
+  font-family: "Open", sans-serif
   a
     color: rgb(223, 116, 48)
 
-.logo
+html, body
+  height: 100%
+
+table
+  margin: auto
+
+#logo
   padding: 1em
-  background: #000
+  text-align: center
   img
     margin-left: 2em
-    height: 50px
-    width: 50px
+    height: 100px
+    width: 100px
 
 h1
-  font-size: 1.4rem
-  text-align: center
+  font-size: 40px
   @extend .mt-2
+  color: rgb(223, 116, 48)
+  font-family: "DIN Condensed"
+  text-transform: uppercase
+  letter-spacing: 2.4px
+  text-align: center
 
 h2
-  font-size: 1.1rem
+  font-size: 21px
+  letter-spacing: .06px
   text-align: center
+  font-weight: 700
+  color: #333
   @extend .mt-2
 
 .tall-row
@@ -71,16 +85,69 @@ table.datagrid
           display: inline
           @extend .small
 
-.success
-  color: #004d00
-
-.fail
-  color: #A8A8A8
-
 button
   border: none
   background: transparent
-  color: #F7F7F7
+  color: rgb(223, 116, 48)
+
+form
+  text-align: center
+
+@media (max-width: 1185px)
+  .rectangle
+    width: 6px
+    height: 2px
+    margin: 1px
+
+@media (min-width: 1185px)
+  .rectangle
+    width: 15px
+    height: 3px
+    margin: 2px
 
 .rectangle
-  height: 50%
+  border: 1px solid #000
+  border-radius: 5px
+  display: inline-block
+  margin-bottom: 4px
+
+.success
+  background: #000
+
+.fail
+  border: 1px solid #900
+
+.future
+  border: 1px solid #EEE
+
+.percentage
+  display: block
+  padding-left: 1em
+  width: 3em
+  font-size: .8em
+
+.quandrant-title, .name
+  letter-spacing: 1.2px
+  font-family: "DIN Condensed"
+  font-size: 15px
+  text-transform: uppercase
+
+.calibration
+  color: #8a7f5b
+
+.connection
+  color: #96561F
+
+.condition
+  color: #195069
+
+.contribution
+  color: #5b531c
+
+.name
+  width: 15em
+  font-size: .9em
+
+.chevron
+  vertical-align: middle
+  font-size: .6em

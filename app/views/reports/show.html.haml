@@ -1,35 +1,49 @@
-%h1 Team Report for #{@team.name}
+%h1
+  Team Report for #{@team.name}
+
+%div
+= simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
+  = f.button :button do
+    %span.fas.fa-sync
+
 %h2
   = link_to [@team, :report, { date: (@date.beginning_of_week - 7.days), token: params[:token]}] do
-    .fas.fa-chevron-left
+    %span.chevron.fas.fa-chevron-left
   #{@date.beginning_of_week} - #{@date.end_of_week}
-  = link_to [@team, :report, { date: (@date.beginning_of_week + 7.days), token: params[:token]}] do
-    .fas.fa-chevron-right
+  - unless @date.end_of_week.future?
+    = link_to [@team, :report, { date: (@date.beginning_of_week + 7.days), token: params[:token]}] do
+      %span.chevron.fas.fa-chevron-right
+
+%hr
+
 
 %table
   %thead
     %tr
       %th
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
-        %td{colspan: 2}= quadrant.downcase.titleize
+        %td.quandrant-title{colspan: 2, class: quadrant.downcase}= quadrant.downcase.titleize
   - @team.users.order(name: :asc).each do |user|
 
     %tr
-      %td{style: "width: 15em;"}
+      %td.name
+        - if user.plans.current(@date).present?
+          = link_to user.plans.current(@date).plan_url, target: :_blank do
+            %span.fas.fa-file
         = user.name
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
         %td
-          - (@date.beginning_of_week..@date.end_of_week).each do |date|
-            %span{style: "width: 1em; display: inline-block;"}
-              - if user.plans.current(@date).success?(date: date, quadrant: quadrant)
-                %span.fas.fa-square.success.rectangle
-              - else
-                %span.far.fa-square.fail.rectangle
-        %td{style: "width: 3em;"}
-          = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
-
-
-%hr
-= simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
-  = f.button :button do
-    %span.fas.fa-sync
+          .d-none.d-md-block
+            - (@date.beginning_of_week..@date.end_of_week).each do |date|
+              %span
+                - if user.plans.current(@date).nil? || date.future?
+                  %span.future.rectangle
+                - elsif user.plans.current(@date).success?(date: date, quadrant: quadrant)
+                  %span.success.rectangle
+                - else
+                  %span.fail.rectangle
+        %td.percentage
+          - if user.plans.current(@date).present?
+            = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
+          - else
+            = "-"
