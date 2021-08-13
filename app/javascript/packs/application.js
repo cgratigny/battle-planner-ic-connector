@@ -7,10 +7,12 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import "channels"
 
+require("jquery")
+require("bootstrap")
+require("tablesort")
+
 Rails.start()
 Turbolinks.start()
-
-require("bootstrap")
 
 import "@fortawesome/fontawesome-free/css/all.css";
 
