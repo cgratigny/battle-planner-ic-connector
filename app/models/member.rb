@@ -13,6 +13,8 @@ class Member < MongoidRecord
   field :updated_at, type: DateTime
   field :member_id, type: Integer
 
+  after_save :update_user
+
   def self.active
     where(status: :active)
   end
@@ -23,6 +25,15 @@ class Member < MongoidRecord
 
   def member_item
     MemberItem.find(member_id)
+  end
+
+  def user
+    User.where(email: self.email).first || Member.where(iron_council_email: self.email).first
+  end
+
+  def update_user
+    return unless user.present?
+    user.update(team_id: self.team_id, team_name: self.team_name)
   end
 
   def refresh(given_member_item = nil)
