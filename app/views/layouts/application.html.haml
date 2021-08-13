@@ -12,9 +12,8 @@
 
     -# %link{rel: "icon", type: "image/png", href: asset_pack_path("media/application/images/favicon.png") }
   %body
-    #wrapper
-      = render "layouts/flash"
-      = render "layouts/header"
+    = render "layouts/flash"
+    = render "layouts/header"
 
-      .container
-        = yield
+    .container
+      = yield
