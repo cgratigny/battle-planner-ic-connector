@@ -20,7 +20,7 @@ class User < MongoidRecord
   validates_uniqueness_of :firestore_id
 
   has_many :plans
-  belongs_to :team, primary_key: :team_id
+  belongs_to :team, primary_key: :team_id, optional: true
 
   def self.sync_from_firestore_user(firestore_user)
     firestore_user_decorator = FirestoreUserDecorator.new(firestore_user)

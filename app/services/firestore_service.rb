@@ -8,13 +8,21 @@ class FirestoreService < ApplicationService
 
   def sync_users
     users_collection.get.each do |firestore_user|
-      User.sync_from_firestore_user(firestore_user)
+      begin
+        User.sync_from_firestore_user(firestore_user)
+      rescue => e
+        ap e.message
+      end
     end
   end
 
   def sync_plans
     users_collection.get.each do |firestore_user|
-      Plan.sync_from_firestore_user(firestore_user, date)
+      begin
+        Plan.sync_from_firestore_user(firestore_user, date)
+      rescue => e
+        ap e.message
+      end
     end
   end
 
@@ -23,7 +31,8 @@ class FirestoreService < ApplicationService
       begin
         plan = Plan.by_firestore_user(firestore_user).by_date(date).first
         plan.sync_for_date(date) if plan.present?
-      rescue
+      rescue => e
+        ap e.message
       end
     end
   end
