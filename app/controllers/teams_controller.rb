@@ -9,7 +9,11 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    render json: @teams.map{ |team| team.to_h }
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @teams.map{ |team| team.to_h } }
+    end
+
   end
 
   def show
@@ -18,12 +22,20 @@ class TeamsController < ApplicationController
 
   private
 
+  def authenticated?
+    if action_name == "index"
+      true
+    else
+      super
+    end
+  end
+
   def find_team
     @team = Team.find_by(team_id: params[:id])
   end
 
   def build_collection
-    @teams = Team.member
+    @teams = Team.member.alphabetical
   end
 
 end

@@ -11,6 +11,7 @@ class Team < MongoidRecord
   before_save :set_team_hash
 
   has_many :users, foreign_key: :team_id, primary_key: :team_id
+  scope :alphabetical, -> { order(name: :asc)}
 
   def self.member
     where(team_type: :member)

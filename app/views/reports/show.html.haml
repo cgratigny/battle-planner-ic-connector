@@ -54,3 +54,10 @@
             = user.plans.current(@date).percentage_for_week(date: @date)
         - else
           = "-"
+
+%br
+%br
+%small.align-center
+  = link_to [:teams] do
+    %span.chevron.fas.fa-chevron-left
+    All Teams
