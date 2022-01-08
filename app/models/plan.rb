@@ -79,7 +79,7 @@ class Plan < MongoidRecord
         successes << success?(quadrant: quadrant.downcase, date: date)
       end
     end
-    ((successes.count(true).to_f / (week_days(args) * quadrants.count).to_f) * 100).round
+    ((successes.count(true).to_f / (week_days(args).to_f * quadrants.count).to_f) * 100).round
   end
 
   def week_days(args)
