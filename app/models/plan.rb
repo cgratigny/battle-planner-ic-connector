@@ -80,6 +80,8 @@ class Plan < MongoidRecord
       end
     end
     ((successes.count(true).to_f / (week_days(args).to_f * quadrants.count.to_f).to_f) * 100).round
+  rescue
+    0
   end
 
   def week_days(args)
