@@ -44,8 +44,11 @@
                   %span.fail.rectangle
         %td.percentage
           - if user.plans.current(@date).present?
-            %span{ class: user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
-              = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
+            - begin
+              %span{ class: user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
+                = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
+            - rescue => e
+              = e.message
           - else
             = "-"
       %td.percentage
