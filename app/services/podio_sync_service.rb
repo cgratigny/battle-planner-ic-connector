@@ -13,7 +13,7 @@ class PodioSyncService < ApplicationService
   # Caches all data by initializing if not already initialized, marking as unprocessed, and caching all services.
   def cache_all
     initialize unless @initialized.present?
-    mark_unprocessed!
+    mark_to_be_processed!
     services.each{ |service| service.cache_all }
   end
 
