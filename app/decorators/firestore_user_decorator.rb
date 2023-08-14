@@ -15,7 +15,8 @@ class FirestoreUserDecorator < ApplicationDecorator
       iron_council_email: @model[:ironCouncilEmail],
       phone: @model[:phone],
       start_date: @model[:startdate],
-      plan_url: plan_url
+      plan_url: plan_url,
+      status: @model[:status]
     }
   end
 
