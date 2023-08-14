@@ -7,15 +7,19 @@ class MemberService < ApplicationService
   def cache_all
     offset = 0
 
-    while (find_all( { offset: offset } )[:all].count > 0) do
-      result = find_all( { offset: offset } )
+    loop do
+      result = find_all(offset: offset)
+    
+      break if result[:all].empty?
+    
       result[:all].each do |member_item|
         ap member_item
         member_item.cache!
       end
+    
       offset += result[:all].count
     end
-
+    
     delete_unprocessed!
   end
 
@@ -27,8 +31,8 @@ class MemberService < ApplicationService
     Member.set_all_to_be_processed!
   end
 
-  def find_all( args = {} )
-    args.merge!( { offset: 0, limit: 500 } )
+  def find_all( given_args = {} )
+    args = { offset: 0, limit: 500 }.merge(given_args)
     ap args
     MemberItem.find_all(23632746, args)
   end
