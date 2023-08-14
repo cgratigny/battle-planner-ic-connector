@@ -44,8 +44,7 @@ class FirestoreService < ApplicationService
   end
 
   def users_collection
-    collection = firestore.col("users").where(:status, :"!=", nil)
-    # .where(:status, :"=", :active)
+    collection = firestore.col("users").where(:status, :"!=", nil) # .where(:status, :"=", :active)
     collection.where(:team_id, :"=", team.team_id) if team.present?
     collection
   end

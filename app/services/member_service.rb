@@ -22,8 +22,7 @@ class MemberService < ApplicationService
   end
 
   def find_all( args = {} )
-    default_args = { offset: 0, limit: 50 }
-    args = default_args.merge( args )
+    args.merge!( { offset: 0, limit: 500 } )
     MemberItem.find_all(23632746, args)
   end
 
