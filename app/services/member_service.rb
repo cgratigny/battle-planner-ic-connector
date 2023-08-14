@@ -15,6 +15,12 @@ class MemberService < ApplicationService
       end
       offset += result[:all].count
     end
+
+    delete_unprocessed!
+  end
+
+  def delete_unprocessed!
+    Member.delete_unprocessed!
   end
 
   def set_all_to_be_processed!
@@ -23,6 +29,7 @@ class MemberService < ApplicationService
 
   def find_all( args = {} )
     args.merge!( { offset: 0, limit: 500 } )
+    ap args
     MemberItem.find_all(23632746, args)
   end
 

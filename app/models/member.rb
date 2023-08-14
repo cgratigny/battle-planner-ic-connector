@@ -31,7 +31,12 @@ class Member < MongoidRecord
     all.each do |member|
       member.update(pending_processing: true)
     end
+  end
 
+  def self.delete_unprocessed!
+    where(pending_processing: true).each do |member|
+      member.destroy
+    end
   end
 
   def active?
