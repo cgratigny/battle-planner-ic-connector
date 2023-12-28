@@ -12,5 +12,4 @@ class ApplicationController < ActionController::Base
     render json: { error: exception.message }
   end
 
-
 end
