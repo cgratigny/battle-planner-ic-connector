@@ -111,6 +111,7 @@ GEM
       xpath (~> 3.2)
     childprocess (3.0.0)
     chronic (0.10.2)
+    colorize (1.1.0)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -375,6 +376,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  colorize (~> 1.1)
   dockerfile-rails (>= 1.6)
   google-cloud-firestore
   hamlit-rails
