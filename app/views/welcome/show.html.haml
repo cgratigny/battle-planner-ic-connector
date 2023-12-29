@@ -1,5 +1,21 @@
-.m-auto.w-96.mt-10
+.m-auto.mt-10{ class: "w-[400px]"}
   = image_tag "app-preview.png", class: "w-fill"
 
-%h2 12 Week Battle Planner
-We’re going to teach you how to get more done in the next 12 weeks than most men do all year. The 12-Week Battle Planner is a system developed over 6 years of testing with tens of thousands of men who have improved every facet of their lives from health and fitness, to money and business, to building and salvaging important relationships, and everything in between. Ready to get in the game?
+.m-auto.w-48
+  = link_to "https://apps.apple.com/us/app/order-of-man-battle-planner/id1538025027", target: :_blank do
+    = image_tag "store-apple.png", class: "w-48 mb-4"
+
+  = link_to "https://play.google.com/store/apps/details?id=com.battleplanner.dev", target: :_blank do
+    = image_tag "store-google.png", class: "w-48"
+
+%div.leading-loose.m-auto.p-6{ class: "max-w-[600px]"}
+  %h2.text-center.font-semibold.mt-8 12 Week Battle Planner
+  %p.m-4.leading-loose
+    We’re going to teach you how to get more done in the next 12 weeks than most men do all year. 
+    The 12-Week Battle Planner is a system developed over 6 years of testing with tens of thousands 
+    of men who have improved every facet of their lives from health and fitness, to money and business, 
+    to building and salvaging important relationships, and everything in between. Ready to get in the game?
+
+%h2.text-center.font-semibold.mt-8 Iron Council Member?  
+%p.m-4.text-center
+  = link_to "Iron Council Information", [:iron_council]
