@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
   # GET /reports/1.json
   def show
     @date = params[:date].try(:to_date) || Date.today
-    @reports = Report.all
+    # @reports = Report.all
   end
 
   # GET /reports/new
@@ -65,7 +65,7 @@ class ReportsController < ApplicationController
 
   private
     def find_team
-      @team = Team.find_by(team_id: params[:team_id])
+      @team = Podio::BattleTeam.find_by(team_id: params[:podio_battle_team_id])
     end
 
     # Only allow a list of trusted parameters through.

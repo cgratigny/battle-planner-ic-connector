@@ -89,11 +89,16 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     amazing_print (1.3.0)
     base64 (0.2.0)
+    better_errors (2.10.1)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
+      rouge (>= 1.0.0)
     bigdecimal (3.1.5)
     bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.7.7)
       msgpack (~> 1.0)
-    bson (4.15.0)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -110,6 +115,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
+    debug_inspector (1.2.0)
     dockerfile-rails (1.6.1)
       rails (>= 3.0.0)
     drb (2.2.0)
@@ -217,13 +223,6 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.20.0)
-    mongo (2.19.3)
-      bson (>= 4.14.1, < 5.0.0)
-    mongoid (8.1.4)
-      activemodel (>= 5.1, < 7.2, != 7.0.0)
-      concurrent-ruby (>= 1.0.5, < 2.0)
-      mongo (>= 2.18.0, < 3.0.0)
-      ruby2_keywords (~> 0.0.5)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multipart-post (2.1.1)
@@ -244,6 +243,7 @@ GEM
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     os (1.1.1)
+    pg (1.5.4)
     psych (5.1.2)
       stringio
     public_suffix (4.0.6)
@@ -302,6 +302,7 @@ GEM
     regexp_parser (2.1.1)
     reline (0.4.1)
       io-console (~> 0.5)
+    rouge (4.2.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (3.142.7)
@@ -368,6 +369,8 @@ PLATFORMS
 
 DEPENDENCIES
   amazing_print
+  better_errors
+  binding_of_caller
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
@@ -377,7 +380,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  mongoid
+  pg
   podio!
   puma
   pundit

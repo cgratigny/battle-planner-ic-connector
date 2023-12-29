@@ -31,11 +31,11 @@ class TeamsController < ApplicationController
   end
 
   def find_team
-    @team = Team.find_by(team_id: params[:id])
+    @team = Podio::BattleTeam.find_by(team_id: params[:id])
   end
 
   def build_collection
-    @teams = Team.member.alphabetical
+    @teams = Podio::BattleTeam.member.alphabetical
   end
 
 end

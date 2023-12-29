@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    render json: User.all.map{ |user| user.to_h(date: date) } if request.format.json?
-    render xml: User.all.map{ |user| user.to_h(date: date) } if request.format.xml?
+    render json: Firestore::User.all.map{ |user| user.to_h(date: date) } if request.format.json?
+    render xml: Firestore::User.all.map{ |user| user.to_h(date: date) } if request.format.xml?
   end
 
   def date
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def find_user
     user = firestore.col("users").doc(params[:id]).get
-    render json: UserDecorator.new(user).to_h
+    render json: Firestore::UserDecorator.new(user).to_h
   end
 
   def build_collection

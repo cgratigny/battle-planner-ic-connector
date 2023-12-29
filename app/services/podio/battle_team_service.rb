@@ -1,4 +1,4 @@
-class TeamService < ApplicationService
+class Podio::BattleTeamService < ApplicationService
 
   def self.initialize
     podio_sync_service
@@ -12,11 +12,11 @@ class TeamService < ApplicationService
 
   def find_all( args = {} )
     args.merge!( { offset: 0, limit: 500 } )
-    TeamItem.find_all(23713788, args)
+    Podio::TeamItem.find_all(23713788, args)
   end
 
   def set_all_to_be_processed!
-    Team.set_all_to_be_processed!
+    Podio::BattleTeam.set_all_to_be_processed!
   end
 
   def name

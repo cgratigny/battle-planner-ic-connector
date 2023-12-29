@@ -9,7 +9,7 @@ class FirestoreUserDecorator < ApplicationDecorator
       team_id: @model[:teamId],
       zip_code: @model[:zipCode],
       age: @model[:age],
-      created_at: @model[:createdAt],
+      account_created_at: @model[:createdAt],
       gender: @model[:gender],
       image_url: @model[:imageUrl],
       iron_council_email: @model[:ironCouncilEmail],

@@ -31,13 +31,13 @@ class PodioSyncService < ApplicationService
 
   # Deletes all data by deleting all teams and members.
   def delete_all
-    Team.delete_all
+    Podio::BattleTeam.delete_all
     Member.delete_all
   end
 
-  # Returns a new instance of the TeamService class.
+  # Returns a new instance of the Podio::BattleTeamService class.
   def team_service
-    @team_service ||= TeamService.new
+    @team_service ||= Podio::BattleTeamService.new
   end
 
   # Returns a new instance of the MemberService class.

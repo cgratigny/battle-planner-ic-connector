@@ -8,32 +8,32 @@ class FirestoreService < ApplicationService
 
   def sync_users
     users_collection.get.each do |firestore_user|
-      begin
-        User.sync_from_firestore_user(firestore_user)
-      rescue => e
-        ap e.message
-      end
+      # begin
+        Firestore::User.sync_from_firestore_user(firestore_user)
+      # rescue => e
+      #   ap e.message
+      # end
     end
   end
 
   def sync_plans
     users_collection.get.each do |firestore_user|
-      begin
-        Plan.sync_from_firestore_user(firestore_user, date)
-      rescue => e
-        ap e.message
-      end
+      # begin
+        Firestore::BattlePlan.sync_from_firestore_user(firestore_user, date)
+      # rescue => e
+      #   ap e.message
+      # end
     end
   end
 
   def sync_progress
     users_collection.get.each do |firestore_user|
-      begin
-        plan = Plan.by_firestore_user(firestore_user).by_date(date).first
+      # begin
+        plan = Firestore::BattlePlan.by_firestore_user(firestore_user).by_date(date).first
         plan.sync_for_date(date) if plan.present?
-      rescue => e
-        ap e.message
-      end
+      # rescue => e
+      #   ap e.message
+      # end
     end
   end
 

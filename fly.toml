@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for battle-planner-ic-connector on 2023-12-28T12:59:57-08:00
+# fly.toml app configuration file generated for battle-planner-ic-connector on 2023-12-28T19:11:19-08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,8 +9,10 @@ console_command = "/rails/bin/rails console"
 
 [build]
 
-[deploy]
-  release_command = "./bin/rails db:prepare"
+[[mounts]]
+  source = "data"
+  destination = "/data"
+  auto_extend_size_threshold = 0
 
 [http_service]
   internal_port = 3000

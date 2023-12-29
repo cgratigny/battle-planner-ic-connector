@@ -27,8 +27,8 @@
 
     %tr
       %td.name
-        - if user.plans.current(@date).present?
-          = link_to user.plans.current(@date).plan_url, target: :_blank do
+        - if user.battle_plans.current(@date).present?
+          = link_to user.battle_plans.current(@date).plan_url, target: :_blank do
             %span.fas.fa-file
         = user.name
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
@@ -36,28 +36,28 @@
           .d-none.d-md-block
             - (@date.beginning_of_week..@date.end_of_week).each do |date|
               %span
-                - if user.plans.current(@date).nil? || date.future?
+                - if user.battle_plans.current(@date).nil? || date.future?
                   %span.future.rectangle
-                - elsif user.plans.current(@date).success?(date: date, quadrant: quadrant)
+                - elsif user.battle_plans.current(@date).success?(date: date, quadrant: quadrant)
                   %span.success.rectangle
                 - else
                   %span.fail.rectangle
         %td.percentage
-          - if user.plans.current(@date).present?
-            %span{ class: user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
-              = user.plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
+          - if user.battle_plans.current(@date).present?
+            %span{ class: user.battle_plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
+              = user.battle_plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
           - else
             = "-"
       %td.percentage
-        - if user.plans.current(@date).present?
-          %span{ class: user.plans.current(@date).percentage_for_week(date: @date) < 80 ? "needs-attention" : "safe"}
-            = user.plans.current(@date).percentage_for_week(date: @date)
+        - if user.battle_plans.current(@date).present?
+          %span{ class: user.battle_plans.current(@date).percentage_for_week(date: @date) < 80 ? "needs-attention" : "safe"}
+            = user.battle_plans.current(@date).percentage_for_week(date: @date)
         - else
           = "-"
 
 %br
 %br
 %small.align-center
-  = link_to [:teams] do
+  = link_to [:podio_battle_teams] do
     %span.chevron.fas.fa-chevron-left
-    All Teams
+    All Battle Teams

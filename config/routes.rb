@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :members
-  resources :teams do
+  resources :teams, as: :podio_battle_teams do
     resource :report
   end
   resources :users
