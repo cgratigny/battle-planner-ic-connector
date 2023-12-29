@@ -33,15 +33,15 @@
         = user.name
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
         %td
-          .d-none.d-md-block
+          .hidden.md:block
             - (@date.beginning_of_week..@date.end_of_week).each do |date|
               %span
                 - if user.battle_plans.current(@date).nil? || date.future?
-                  %span.future.rectangle
+                  = heroicon("minus-circle", variant: :micro, size: 10, class: "inline text-gray-200")
                 - elsif user.battle_plans.current(@date).success?(date: date, quadrant: quadrant)
-                  %span.success.rectangle
+                  = heroicon("check-circle", variant: :micro, size: 10, class: "inline text-green-800")
                 - else
-                  %span.fail.rectangle
+                  = heroicon("x-circle", variant: :micro, size: 10, class: "inline text-red-800")
         %td.percentage.font-thin.text-center
           - if user.battle_plans.current(@date).present?
             %span{ class: user.battle_plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
