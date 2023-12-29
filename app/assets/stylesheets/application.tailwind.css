@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
   .btn-primary {
     @apply py-2 px-4 bg-blue-200;
   }
-}
 
-*/
+  .card {
+    @apply p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-4;
+  }
+}

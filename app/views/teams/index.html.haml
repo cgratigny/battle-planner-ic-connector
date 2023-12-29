@@ -1,10 +1,11 @@
-%h1
+%h1.font-semibold.text-2xl.text-center
   Battle Teams
 
-- @teams.each do |team|
-  %p
-    %strong
-      = team.name
-      (#{team.members_array.count} members)
-    %br
-    = link_to "View Report", [team, :report]
+.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
+  - @teams.each do |team|
+    .card.w-96
+      %strong
+        = team.name
+        (#{team.members_array.count} members)
+      %br
+      = link_to "View Report", [team, :report]

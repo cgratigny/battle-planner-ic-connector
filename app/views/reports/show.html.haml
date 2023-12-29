@@ -1,36 +1,35 @@
-%h1
+%h1.font-semibold.text-2xl.text-center
   Team Report for #{@team.name}
 
-%div
-= simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
-  = f.button :button do
-    Update
-    %span.fas.fa-sync
+%div.text-center
+  = simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
+    = f.button :button, form: { class: "inline" } do
+      = heroicon("arrow-path", variant: :mini, class: "inline")
 
-%h2
+%h2.text-center.mt-2
   = link_to [@team, :report, { date: (@date.beginning_of_week - 7.days), token: params[:token]}] do
-    %span.chevron.fas.fa-chevron-left
-  #{@date.beginning_of_week.to_fs} - #{@date.end_of_week.to_fs}
+    = heroicon("chevron-left", variant: :mini, class: "inline")
+  %span #{@date.beginning_of_week.to_fs} - #{@date.end_of_week.to_fs}
   - unless @date.end_of_week.future?
     = link_to [@team, :report, { date: (@date.beginning_of_week + 7.days), token: params[:token]}] do
-      %span.chevron.fas.fa-chevron-right
+      = heroicon("chevron-right", variant: :mini, class: "inline")
 
-%hr
-
-%table#sortable-table
+%table#sortable-table.mt-4.mx-auto{ class: "w-full lg:w-[900px]" }
   %thead
-    %tr
-      %th
+    %tr.font-thin.text-center
+      %th.font-thin.text-center
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
-        %th.quadrant-title{colspan: 2, class: quadrant.downcase}= quadrant.downcase.titleize
-      %th.quadrant-title Total
+        %th.font-thin.text-center.quadrant-title{colspan: 2, class: quadrant.downcase}= quadrant.downcase.titleize
+      %th.font-thin.text-center Total
   - @team.users.order(name: :asc).each do |user|
 
     %tr
       %td.name
         - if user.battle_plans.current(@date).present?
-          = link_to user.battle_plans.current(@date).plan_url, target: :_blank do
-            %span.fas.fa-file
+          %span
+            = link_to user.battle_plans.current(@date).plan_url, target: :_blank do
+              = heroicon("document", variant: :micro, class: "inline")
+
         = user.name
       - ["CALIBRATION", "CONNECTION", "CONDITION", "CONTRIBUTION"].each do |quadrant|
         %td
@@ -43,22 +42,20 @@
                   %span.success.rectangle
                 - else
                   %span.fail.rectangle
-        %td.percentage
+        %td.percentage.font-thin.text-center
           - if user.battle_plans.current(@date).present?
             %span{ class: user.battle_plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant) < 80 ? "needs-attention" : "safe"}
               = user.battle_plans.current(@date).percentage_for_week(date: @date, quadrant: quadrant)
           - else
             = "-"
-      %td.percentage
+      %td.percentage.font-thin.text-center
         - if user.battle_plans.current(@date).present?
           %span{ class: user.battle_plans.current(@date).percentage_for_week(date: @date) < 80 ? "needs-attention" : "safe"}
             = user.battle_plans.current(@date).percentage_for_week(date: @date)
         - else
           = "-"
 
-%br
-%br
-%small.align-center
+.text-center.mt-10.text-xs
   = link_to [:podio_battle_teams] do
     %span.chevron.fas.fa-chevron-left
     All Battle Teams
