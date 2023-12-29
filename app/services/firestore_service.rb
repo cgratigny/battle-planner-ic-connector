@@ -32,7 +32,10 @@ class FirestoreService < ApplicationService
 
   def sync_progress
     puts " = Sync Progress".black.bold
-    Firestore::BattlePlan.by_date(date).joins(:firestore_user).includes(:firestore_user).each do |plan|
+    battle_plans = Firestore::BattlePlan.by_date(date).joins(:firestore_user).includes(:firestore_user)
+    battle_plans = battle_plans.where(firestore_user: { team_id: team.team_id }) if team.present?
+
+    battle_plans.each do |plan|
       puts " - Process #{plan.firestore_user.email}".gray
       begin
         plan.sync_for_date(date)
@@ -44,7 +47,7 @@ class FirestoreService < ApplicationService
 
   def sync_progress_for_week
     (self.date.beginning_of_week..self.date.end_of_week).each do |date|
-      FirestoreService.new(date: date).sync_progress
+      FirestoreService.new(date: date, team: team).sync_progress
     end
   end
 

@@ -3,8 +3,8 @@
 
 %div.text-center
   = simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
-    = f.button :button, form: { class: "inline" } do
-      = heroicon("arrow-path", variant: :mini, class: "inline")
+    = f.button :button do
+      = heroicon("arrow-path", variant: :mini )
 
 %h2.text-center.mt-2
   = link_to [@team, :report, { date: (@date.beginning_of_week - 7.days), token: params[:token]}] do
