@@ -32,11 +32,10 @@ class FirestoreService < ApplicationService
 
   def sync_progress
     puts " = Sync Progress".black.bold
-    users_collection.get.each do |firestore_user|
-      puts " - Process #{firestore_user.get(:email)}".gray
+    Firestore::BattlePlan.by_date(date).joins(:firestore_user).includes(:firestore_user).each do |plan|
+      puts " - Process #{plan.firestore_user.email}".gray
       begin
-        plan = Firestore::BattlePlan.by_firestore_user(firestore_user).by_date(date).first
-        plan.sync_for_date(date) if plan.present?
+        plan.sync_for_date(date)
       rescue => e
         Honeybadger.notify(e)
       end

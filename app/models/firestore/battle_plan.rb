@@ -33,17 +33,21 @@
       self.save
     end
 
-    def firestore_success_for_date?(args)
+    def firestore_success_for_date?(args)      
       begin
-        firestore.col("users").doc(self.firestore_user.firestore_id).col(args[:quadrant].upcase).doc(args[:date].to_s(:firestore_date)).get[args[:date].to_s(:firestore_date).to_sym]
+        remote_firestore_user.col(args[:quadrant].upcase).doc(args[:date].to_fs(:firestore_date)).get[args[:date].to_fs(:firestore_date).to_sym]
       rescue
-        nil
+        false
       end
+    end
+
+    def remote_firestore_user
+      @remote_firestore_user ||= firestore.col("users").doc(self.firestore_user.firestore_id)
     end
 
     def success?(args)
       begin
-        self.send("#{args[:quadrant].downcase}_data")[args[:date].to_s(:simple)]
+        self.send("#{args[:quadrant].downcase}_data")[args[:date].to_fs(:simple)]
       rescue
         nil
       end
