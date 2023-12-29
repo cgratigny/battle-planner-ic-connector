@@ -9,7 +9,7 @@
 %h2
   = link_to [@team, :report, { date: (@date.beginning_of_week - 7.days), token: params[:token]}] do
     %span.chevron.fas.fa-chevron-left
-  #{@date.beginning_of_week} - #{@date.end_of_week}
+  #{@date.beginning_of_week.to_fs} - #{@date.end_of_week.to_fs}
   - unless @date.end_of_week.future?
     = link_to [@team, :report, { date: (@date.beginning_of_week + 7.days), token: params[:token]}] do
       %span.chevron.fas.fa-chevron-right

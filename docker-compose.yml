@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  web:
+    build:
+      context: .
+      dockerfile: lib/Dockerfile
+    volumes:
+      - .:/battle_planner_app:cached
+      - bundle_data:/usr/local/bundle
+      - node_modules:/battle_planner_app/node_modules
+      - packs:/battle_planner_app/public/packs
+      - public_assets:/battle_planner_app/public/assets
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    environment:
+      MONGODB_URI: mongodb://mongo/battle_planner_app_development
+      CONTAINER_ROLE: web
+      LAUNCHY_DRY_RUN: true
+      BROWSER: /dev/null
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+  mongo_data:
+  bundle_data:
+  node_modules:
+  packs:
+  public_assets:
+  letter_opener:
