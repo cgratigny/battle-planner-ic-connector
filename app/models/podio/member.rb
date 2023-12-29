@@ -60,12 +60,12 @@ module Podio
 
     def api_team_id
       return nil unless self.active?
-      self.team_id
+      self.podio_team_id
     end
 
     def api_team_name
       return nil unless self.active?
-      self.team_name
+      self.podio_team_name
     end
   end
 end

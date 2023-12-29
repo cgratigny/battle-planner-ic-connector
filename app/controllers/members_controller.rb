@@ -16,11 +16,11 @@ class MembersController < ApplicationController
 
   def build_collection
     if params[:status] == :active.to_s
-      @members = Member.active
+      @members = Podio::Member.active
     elsif params[:status] == :deactivated.to_s
-      @members = Member.deactivated
+      @members = Podio::Member.deactivated
     else
-      @members = Member.all
+      @members = Podio::Member.all
     end
   end
 
