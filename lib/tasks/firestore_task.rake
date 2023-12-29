@@ -1,6 +1,13 @@
 namespace :firestore_task do
   desc "Refresh users from firestore"
 
+  task :sync_all => :environment do
+    Rake::Task["firestore_task:sync_users"].invoke
+    Rake::Task["firestore_task:sync_plans"].invoke
+    Rake::Task["firestore_task:sync_all_progress"].invoke
+    Honeybadger.check_in('pMI2mJ')
+  end
+
   task :sync_users => :environment do
     FirestoreService.new.sync_users
   end
