@@ -4,6 +4,7 @@
 %div
 = simple_form_for(@team, url: [@team, :report, { date: params[:date], token: params[:token]}], method: :patch) do |f|
   = f.button :button do
+    Update
     %span.fas.fa-sync
 
 %h2
