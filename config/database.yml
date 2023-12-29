@@ -52,11 +52,9 @@ test:
 beta:
   url: <%= ENV['DATABASE_URL'] %>
   <<: *default
-  database: my_next_move_beta
   pool: <%= Rails.application.credentials.dig(:beta, :database, :rails_max_threads) || 50 %>
 
 production:
-  url: <%= Rails.application.credentials.dig(:production, :database, :url) %>
+  url: <%= ENV['DATABASE_URL'] %>
   <<: *default
-  database: my_next_move_production
   pool: <%= Rails.application.credentials.dig(:production, :database, :rails_max_threads) || 50 %>
