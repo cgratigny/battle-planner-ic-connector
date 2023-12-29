@@ -194,6 +194,7 @@ GEM
       activesupport (>= 4.0.1)
       hamlit (>= 1.2.0)
       railties (>= 4.0.1)
+    honeybadger (5.4.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -377,6 +378,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.6)
   google-cloud-firestore
   hamlit-rails
+  honeybadger (~> 5.4)
   importmap-rails
   jbuilder (~> 2.7)
   listen (~> 3.2)

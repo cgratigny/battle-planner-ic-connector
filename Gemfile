@@ -83,3 +83,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "dockerfile-rails", ">= 1.6", :group => :development
 gem "tailwindcss-rails", "~> 2.1"
 gem "rails_heroicon"
+
+
+gem "honeybadger", "~> 5.4"
