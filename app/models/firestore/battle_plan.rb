@@ -63,7 +63,7 @@
           successes << success?(quadrant: quadrant.downcase, date: date)
         end
       end
-      ((successes.count(true).to_f / (week_days(args).to_f * quadrants.count.to_f).to_f) * 100).round
+      [((successes.count(true).to_f / (week_days(args).to_f * quadrants.count.to_f).to_f) * 100).round, 100].min
     rescue
       0
     end
