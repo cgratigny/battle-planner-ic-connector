@@ -4,7 +4,6 @@ namespace :firestore_task do
   task :sync_all => :environment do
     Rake::Task["firestore_task:sync_users"].invoke
     Rake::Task["firestore_task:sync_plans"].invoke
-    Rake::Task["firestore_task:sync_all_progress"].invoke
     Honeybadger.check_in('pMI2mJ')
   end
 
@@ -27,6 +26,7 @@ namespace :firestore_task do
   task :sync_recent_progress => :environment do
     FirestoreService.new(date: 1.day.ago.to_date).sync_progress
     FirestoreService.new(date: Date.today).sync_progress
+    Honeybadger.check_in('JEIxJM')
   end
 
 end
