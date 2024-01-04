@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple project that synchronizes users for a Flutter app. This reads an API on Podio, then presents a json feed for the app to connect to.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This also reads data from firestore, syncing it and displaying the tracking information on a web view. This part of the app is less developed, as Rails isn't the best way to communicate with firestore.
