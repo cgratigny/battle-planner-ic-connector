@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: podio_members
+#
+#  id                 :bigint           not null, primary key
+#  email              :string
+#  first_name         :string
+#  full_name          :string
+#  iron_council_email :string
+#  last_name          :string
+#  pending_processing :boolean
+#  podio_team_name    :string
+#  status             :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  podio_member_id    :bigint
+#  podio_team_id      :bigint
+#
 module Podio
   def self.table_name_prefix
     "podio_"

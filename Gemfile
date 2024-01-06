@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.7'
 
 gem "pg"
 
+# annotate the model files
+gem 'annotate'
+
 # firebase connection
 gem "google-cloud-firestore"
 

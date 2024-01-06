@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: podio_battle_teams
+#
+#  id                 :bigint           not null, primary key
+#  members_array      :text             default([]), is an Array
+#  name               :string
+#  pending_processing :boolean
+#  team_hash          :string
+#  team_type          :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  team_id            :bigint
+#
 module Podio
 
   def self.table_name_prefix
@@ -7,6 +21,8 @@ module Podio
   class BattleTeam < ApplicationRecord
     include Podio
     before_save :set_team_hash
+
+    has_many :members, class_name: "Podio::Member", foreign_key: :podio_member_id
 
     scope :alphabetical, -> { order(name: :asc)}
 
