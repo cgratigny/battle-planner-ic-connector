@@ -70,7 +70,3 @@ yarn-debug.log*
 .keep
 /app/assets/builds/*
 !/app/assets/builds/.keep
-
-lib/Dockerfile
-Dockerfile
-/config/master.key
