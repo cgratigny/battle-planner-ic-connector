@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
+gem "bigdecimal", '= 3.1.6'
+
 gem "pg"
 
 # annotate the model files
