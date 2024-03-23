@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   get "privacy" => "welcome#privacy"
   get "example-vision" => "welcome#example_vision"
   get "iron-council" => "welcome#iron_council"
+  get "request-data-deletion" => "welcome#request_data_deletion"
   root "welcome#show"
 end
