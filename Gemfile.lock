@@ -8,6 +8,12 @@ GIT
       faraday (>= 0.8.0)
       multi_json
 
+GIT
+  remote: https://github.com/ruby/bigdecimal.git
+  revision: cbb53692f163babcb8360ed3a1f50068f315886c
+  specs:
+    bigdecimal (3.1.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -96,12 +102,11 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
-    bigdecimal (3.1.6)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.7.7)
-      msgpack (~> 1.0)
+    bootsnap (1.18.3)
+      msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -227,7 +232,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.22.3)
-    msgpack (1.4.2)
+    msgpack (1.7.2)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     mutex_m (0.2.0)
@@ -375,7 +380,7 @@ DEPENDENCIES
   amazing_print
   annotate
   better_errors
-  bigdecimal (= 3.1.6)
+  bigdecimal (= 3.1.7)!
   binding_of_caller
   bootsnap (>= 1.4.2)
   byebug
