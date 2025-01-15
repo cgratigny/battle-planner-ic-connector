@@ -8,12 +8,6 @@ GIT
       faraday (>= 0.8.0)
       multi_json
 
-GIT
-  remote: https://github.com/ruby/bigdecimal.git
-  revision: cbb53692f163babcb8360ed3a1f50068f315886c
-  specs:
-    bigdecimal (3.1.7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -102,6 +96,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
+    bigdecimal (3.1.9)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -380,7 +375,6 @@ DEPENDENCIES
   amazing_print
   annotate
   better_errors
-  bigdecimal (= 3.1.7)!
   binding_of_caller
   bootsnap (>= 1.4.2)
   byebug
